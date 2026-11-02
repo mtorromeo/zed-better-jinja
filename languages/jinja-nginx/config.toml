@@ -1,0 +1,14 @@
+name = "Jinja Nginx"
+grammar = "better_jinja"
+path_suffixes = ["nginx.j2", "nginx.jinja", "nginx.jinja2", "nginx.conf.j2", "nginx.conf.jinja", "nginx.conf.jinja2"]
+block_comment = ["{# ", " #}"]
+autoclose_before = "}])>\"'"
+brackets = [
+  { start = "{{", end = "}}", close = true, newline = false },
+  { start = "{%", end = "%}", close = true, newline = false },
+  { start = "{#", end = "#}", close = true, newline = false },
+  { start = "[", end = "]", close = true, newline = true },
+  { start = "(", end = ")", close = true, newline = true },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["comment", "string"] },
+  { start = "'", end = "'", close = true, newline = false, not_in = ["comment", "string"] },
+]

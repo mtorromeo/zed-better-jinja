@@ -1,0 +1,104 @@
+========================================
+Plain content
+========================================
+
+key: value
+  nested: {x}
+
+----------------------------------------
+
+(template
+  (content))
+
+========================================
+Expression in YAML
+========================================
+
+name: "{{ name }}"
+
+----------------------------------------
+
+(template
+  (content)
+  (expression_tag
+    (identifier))
+  (content))
+
+========================================
+Whitespace control
+========================================
+
+{%- if a -%}
+{{- b +}}
+{%+ endif +%}
+
+----------------------------------------
+
+(template
+  (content)
+  (statement_tag
+    (if_statement
+      (identifier)))
+  (content)
+  (expression_tag
+    (identifier))
+  (content)
+  (statement_tag
+    (custom_statement
+      (identifier)))
+  (content))
+
+========================================
+Comment
+========================================
+
+a {# one
+ # two #} b
+
+----------------------------------------
+
+(template
+  (content)
+  (comment)
+  (content))
+
+========================================
+Raw block
+========================================
+
+{% raw %}{{ x }}{% if %}{%- endraw %}
+
+----------------------------------------
+
+(template
+  (content)
+  (raw_block
+    (raw_body))
+  (content))
+
+========================================
+Empty raw block
+========================================
+
+{% raw %}{% endraw %}
+
+----------------------------------------
+
+(template
+  (content)
+  (raw_block)
+  (content))
+
+========================================
+Lone braces
+========================================
+
+a { b } {{ c }} {
+
+----------------------------------------
+
+(template
+  (content)
+  (expression_tag
+    (identifier))
+  (content))

@@ -1,0 +1,14 @@
+name = "Jinja HTML"
+grammar = "better_jinja"
+path_suffixes = ["html.j2", "html.jinja", "html.jinja2", "htm.j2", "htm.jinja", "htm.jinja2"]
+block_comment = ["{# ", " #}"]
+autoclose_before = "}])>\"'"
+brackets = [
+  { start = "{{", end = "}}", close = true, newline = false },
+  { start = "{%", end = "%}", close = true, newline = false },
+  { start = "{#", end = "#}", close = true, newline = false },
+  { start = "[", end = "]", close = true, newline = true },
+  { start = "(", end = ")", close = true, newline = true },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["comment", "string"] },
+  { start = "'", end = "'", close = true, newline = false, not_in = ["comment", "string"] },
+]

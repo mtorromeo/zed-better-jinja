@@ -1,0 +1,35 @@
+# {{ ansible_managed }}
+{# A multi-line
+   comment #}
+server:
+  name: "{{ inventory_hostname | upper }}"
+  port: {{ port | default(8080) }}
+  enabled: {{ enabled is defined and enabled }}
+{% if users is defined %}
+  users:
+{%- for user in users if user.active %}
+    - name: {{ user.name ~ '-' ~ loop.index }}
+      groups: {{ user.groups | map(attribute='name') | list | to_json }}
+      shell: {{ user.shell | ansible.builtin.quote }}
+{%- endfor %}
+{% else %}
+  users: []
+{% endif %}
+{% set ns = namespace(found=false) %}
+{% set ns.found = true %}
+{% set a, b = 1, 2 %}
+math: {{ (1 + 2) * 3 // 2 ** 2 - -1 % 4 }}
+slice: {{ items[1:-1] }} {{ items[::2] }} {{ data['key'].sub[0] }}
+dict: {{ {'a': 1, "b": [1, 2.5, 1e3], 'c': none, 'd': True} }}
+cond: {{ 'yes' if flag else 'no' }}
+notin: {{ x not in y and not z }}
+test: {{ x is not divisibleby 3 }} {{ x is none }} {{ x is sameas false }}
+{% raw %}
+literal: {{ not parsed }} {% if %}
+{% endraw %}
+{% include 'common.yaml.j2' ignore missing with context %}
+{% from 'macros.j2' import render as r, other with context %}
+{% import 'macros.j2' as m %}
+{% do items.append(1) %}
+{% trans count=n %}one{% pluralize %}many{% endtrans %}
+{% unknown_ext_tag foo, bar: baz %}

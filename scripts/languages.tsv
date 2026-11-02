@@ -1,0 +1,15 @@
+# directory	language name	injected language	file suffixes (each gets .j2, .jinja, .jinja2)
+html	Jinja HTML	HTML	html htm
+yaml	Jinja YAML	YAML	yaml yml
+json	Jinja JSON	JSON	json
+toml	Jinja TOML	TOML	toml
+sql	Jinja SQL	SQL	sql
+markdown	Jinja Markdown	Markdown	md markdown
+xml	Jinja XML	XML	xml
+css	Jinja CSS	CSS	css
+javascript	Jinja JavaScript	JavaScript	js
+python	Jinja Python	Python	py
+shell	Jinja Shell Script	Shell Script	sh bash zsh
+ini	Jinja INI	ini	ini cfg
+nginx	Jinja Nginx	Nginx	nginx nginx.conf
+dockerfile	Jinja Dockerfile	Dockerfile	Dockerfile dockerfile

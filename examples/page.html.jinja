@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content scoped %}
+<ul class="{{ cls }}" data-x='{{ x|tojson }}'>
+  {% for key, value in mapping.items() recursive %}
+  <li><a href="{{ url_for('page', id=value.id, **extra) }}">{{ key|e }}</a></li>
+  {% endfor %}
+</ul>
+{% macro input(name, value='', type='text', size=20) -%}
+  <input type="{{ type }}" name="{{ name }}" value="{{ value|e }}" size="{{ size }}">
+{%- endmacro %}
+{% call(user) dump_users(list_of_user) %}
+  <dd>{{ user.username|e }}</dd>
+{% endcall %}
+{% filter upper | trim %}text{% endfilter %}
+{% with a = 1, b = 2 %}{{ a + b }}{% endwith %}
+{% autoescape true %}{{ html }}{% endautoescape %}
+{%+ if x +%}{{- y -}}{%- endif -%}
+<style>body { color: red; }</style>
+<script>var x = {{ data|tojson }}; if (a) { b(); }</script>
+{% endblock %}

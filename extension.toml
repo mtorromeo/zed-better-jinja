@@ -1,0 +1,12 @@
+id = "better-jinja"
+name = "Better Jinja"
+version = "1.0.0"
+schema_version = 1
+authors = ["Massimiliano Torromeo <massimiliano.torromeo@gmail.com>"]
+description = "Jinja templates mixed with YAML, HTML, JSON, TOML, SQL, Markdown and more"
+repository = "https://github.com/mtorromeo/zed-better-jinja"
+
+[grammars.better_jinja]
+repository = "https://github.com/mtorromeo/zed-better-jinja"
+rev = "HEAD"
+path = "grammar"

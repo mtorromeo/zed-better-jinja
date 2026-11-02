@@ -1,0 +1,212 @@
+========================================
+Literals
+========================================
+
+{{ [1, 2.5, 1e3, 0x1F, 'a', "b", true, False, none, (1,), ()] }}
+
+----------------------------------------
+
+(template
+  (content)
+  (expression_tag
+    (list
+      (integer)
+      (float)
+      (float)
+      (integer)
+      (string)
+      (string)
+      (boolean)
+      (boolean)
+      (none)
+      (tuple
+        (integer))
+      (tuple)))
+  (content))
+
+========================================
+Dict
+========================================
+
+{{ {'a': {'b': 1}} }}
+
+----------------------------------------
+
+(template
+  (content)
+  (expression_tag
+    (dict
+      (pair
+        (string)
+        (dict
+          (pair
+            (string)
+            (integer))))))
+  (content))
+
+========================================
+Operators
+========================================
+
+{{ (1 + 2) * 3 // 2 ** 2 - -1 % 4 ~ 'x' }}
+
+----------------------------------------
+
+(template
+  (content)
+  (expression_tag
+    (binary_expression
+      (binary_expression
+        (binary_expression
+          (binary_expression
+            (parenthesized_expression
+              (binary_expression
+                (integer)
+                (integer)))
+            (integer))
+          (binary_expression
+            (integer)
+            (integer)))
+        (binary_expression
+          (unary_expression
+            (integer))
+          (integer)))
+      (string)))
+  (content))
+
+========================================
+Boolean and comparison
+========================================
+
+{{ a == b and not c or d not in e }}
+
+----------------------------------------
+
+(template
+  (content)
+  (expression_tag
+    (boolean_expression
+      (boolean_expression
+        (comparison
+          (identifier)
+          (identifier))
+        (not_expression
+          (identifier)))
+      (comparison
+        (identifier)
+        (identifier))))
+  (content))
+
+========================================
+Postfix
+========================================
+
+{{ a.b[0].c(1, k=2, *args, **kw)[1:2] }}
+
+----------------------------------------
+
+(template
+  (content)
+  (expression_tag
+    (subscript
+      (call
+        (attribute
+          (subscript
+            (attribute
+              (identifier)
+              (identifier))
+            (integer))
+          (identifier))
+        (arguments
+          (integer)
+          (keyword_argument
+            (identifier)
+            (integer))
+          (list_splat
+            (identifier))
+          (dictionary_splat
+            (identifier))))
+      (slice
+        (integer)
+        (integer))))
+  (content))
+
+========================================
+Filters
+========================================
+
+{{ x | default('a') | ansible.builtin.to_json(indent=2) }}
+
+----------------------------------------
+
+(template
+  (content)
+  (expression_tag
+    (filter
+      (filter
+        (identifier)
+        (filter_name)
+        (arguments
+          (string)))
+      (filter_name)
+      (arguments
+        (keyword_argument
+          (identifier)
+          (integer)))))
+  (content))
+
+========================================
+Tests
+========================================
+
+{{ x is defined }} {{ x is not none }} {{ x is divisibleby 3 }} {{ x is ansible.builtin.match('a') }}
+
+----------------------------------------
+
+(template
+  (content)
+  (expression_tag
+    (test
+      (identifier)
+      (test_name)))
+  (content)
+  (expression_tag
+    (test
+      (identifier)
+      (test_name)))
+  (content)
+  (expression_tag
+    (test
+      (identifier)
+      (test_name)
+      (integer)))
+  (content)
+  (expression_tag
+    (test
+      (identifier)
+      (test_name)
+      (arguments
+        (string))))
+  (content))
+
+========================================
+Conditional
+========================================
+
+{{ 'a' if b else 'c' }} {{ 'a' if b }}
+
+----------------------------------------
+
+(template
+  (content)
+  (expression_tag
+    (conditional_expression
+      (string)
+      (identifier)
+      (string)))
+  (content)
+  (expression_tag
+    (conditional_expression
+      (string)
+      (identifier)))
+  (content))

@@ -1,0 +1,14 @@
+name = "Jinja Shell Script"
+grammar = "better_jinja"
+path_suffixes = ["sh.j2", "sh.jinja", "sh.jinja2", "bash.j2", "bash.jinja", "bash.jinja2", "zsh.j2", "zsh.jinja", "zsh.jinja2"]
+block_comment = ["{# ", " #}"]
+autoclose_before = "}])>\"'"
+brackets = [
+  { start = "{{", end = "}}", close = true, newline = false },
+  { start = "{%", end = "%}", close = true, newline = false },
+  { start = "{#", end = "#}", close = true, newline = false },
+  { start = "[", end = "]", close = true, newline = true },
+  { start = "(", end = ")", close = true, newline = true },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["comment", "string"] },
+  { start = "'", end = "'", close = true, newline = false, not_in = ["comment", "string"] },
+]

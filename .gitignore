@@ -1,0 +1,5 @@
+/grammars/
+/extension.wasm
+/grammar/build/
+/grammar/*.wasm
+/grammar/node_modules/

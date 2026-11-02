@@ -1,0 +1,22 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "better_jinja",
+      "camelcase": "BetterJinja",
+      "title": "Better Jinja",
+      "scope": "text.jinja",
+      "path": ".",
+      "file-types": [],
+      "highlights": "../queries/highlights.scm",
+      "injection-regex": "^(jinja|better_jinja)$"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": "Jinja template grammar for mixed-language files",
+    "authors": [{ "name": "Massimiliano Torromeo", "email": "massimiliano.torromeo@gmail.com" }],
+    "links": { "repository": "https://github.com/mtorromeo/zed-better-jinja" }
+  }
+}

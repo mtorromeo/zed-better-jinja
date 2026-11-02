@@ -1,0 +1,238 @@
+========================================
+If
+========================================
+
+{% if a %}{% elif b %}{% else %}{% endif %}
+
+----------------------------------------
+
+(template
+  (content)
+  (statement_tag
+    (if_statement
+      (identifier)))
+  (statement_tag
+    (elif_statement
+      (identifier)))
+  (statement_tag
+    (else_statement))
+  (statement_tag
+    (custom_statement
+      (identifier)))
+  (content))
+
+========================================
+For
+========================================
+
+{% for k, v in d.items() recursive %}{% endfor %}
+
+----------------------------------------
+
+(template
+  (content)
+  (statement_tag
+    (for_statement
+      (target_tuple
+        (identifier)
+        (identifier))
+      (call
+        (attribute
+          (identifier)
+          (identifier))
+        (arguments))))
+  (statement_tag
+    (custom_statement
+      (identifier)))
+  (content))
+
+========================================
+Set
+========================================
+
+{% set x = 1 %}{% set a, b = 1, 2 %}{% set ns.v = true %}{% set y | upper %}{% endset %}
+
+----------------------------------------
+
+(template
+  (content)
+  (statement_tag
+    (set_statement
+      (identifier)
+      (integer)))
+  (statement_tag
+    (set_statement
+      (target_tuple
+        (identifier)
+        (identifier))
+      (tuple
+        (integer)
+        (integer))))
+  (statement_tag
+    (set_statement
+      (attribute
+        (identifier)
+        (identifier))
+      (boolean)))
+  (statement_tag
+    (set_statement
+      (identifier)
+      (filter_name)))
+  (statement_tag
+    (custom_statement
+      (identifier)))
+  (content))
+
+========================================
+Block and extends
+========================================
+
+{% extends 'base.html' %}{% block body scoped required %}{% endblock body %}
+
+----------------------------------------
+
+(template
+  (content)
+  (statement_tag
+    (extends_statement
+      (string)))
+  (statement_tag
+    (block_statement
+      (identifier)))
+  (statement_tag
+    (custom_statement
+      (identifier)
+      (identifier)))
+  (content))
+
+========================================
+Include and imports
+========================================
+
+{% include 'a' ignore missing without context %}{% import 'm' as m %}{% from 'm' import a as b, c with context %}
+
+----------------------------------------
+
+(template
+  (content)
+  (statement_tag
+    (include_statement
+      (string)))
+  (statement_tag
+    (import_statement
+      (string)
+      (identifier)))
+  (statement_tag
+    (from_statement
+      (string)
+      (import_name
+        (identifier)
+        (identifier))
+      (import_name
+        (identifier))))
+  (content))
+
+========================================
+Macro and call
+========================================
+
+{% macro f(a, b=1) %}{% endmacro %}{% call(x) f(1) %}{% endcall %}{% call f() %}{% endcall %}
+
+----------------------------------------
+
+(template
+  (content)
+  (statement_tag
+    (macro_statement
+      (identifier)
+      (parameters
+        (identifier)
+        (default_parameter
+          (identifier)
+          (integer)))))
+  (statement_tag
+    (custom_statement
+      (identifier)))
+  (statement_tag
+    (call_statement
+      (parameters
+        (identifier))
+      (call
+        (identifier)
+        (arguments
+          (integer)))))
+  (statement_tag
+    (custom_statement
+      (identifier)))
+  (statement_tag
+    (call_statement
+      (call
+        (identifier)
+        (arguments))))
+  (statement_tag
+    (custom_statement
+      (identifier)))
+  (content))
+
+========================================
+Filter and with
+========================================
+
+{% filter upper | trim %}{% endfilter %}{% with a = 1 %}{% endwith %}
+
+----------------------------------------
+
+(template
+  (content)
+  (statement_tag
+    (filter_statement
+      (filter_name)
+      (filter_name)))
+  (statement_tag
+    (custom_statement
+      (identifier)))
+  (statement_tag
+    (with_statement
+      (assignment
+        (identifier)
+        (integer))))
+  (statement_tag
+    (custom_statement
+      (identifier)))
+  (content))
+
+========================================
+Custom tags
+========================================
+
+{% do x.append(1) %}{% trans count=n %}{% endtrans %}{% ext a, b: c %}
+
+----------------------------------------
+
+(template
+  (content)
+  (statement_tag
+    (custom_statement
+      (identifier)
+      (call
+        (attribute
+          (identifier)
+          (identifier))
+        (arguments
+          (integer)))))
+  (statement_tag
+    (custom_statement
+      (identifier)
+      (keyword_argument
+        (identifier)
+        (identifier))))
+  (statement_tag
+    (custom_statement
+      (identifier)))
+  (statement_tag
+    (custom_statement
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier)))
+  (content))
