@@ -8,5 +8,5 @@ repository = "https://github.com/mtorromeo/zed-better-jinja"
 
 [grammars.better_jinja]
 repository = "https://github.com/mtorromeo/zed-better-jinja"
-rev = "HEAD"
+rev = "b39552c475a088c6172ec08d34dfc23de7f661c0"
 path = "grammar"
