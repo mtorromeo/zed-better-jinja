@@ -90,8 +90,9 @@ static bool scan_raw_body(TSLexer *lexer) {
 
 bool tree_sitter_better_jinja_external_scanner_scan(void *payload, TSLexer *lexer,
                                                     const bool *valid_symbols) {
-  // Both valid only during error recovery: let the internal lexer handle it.
-  if (valid_symbols[CONTENT] && valid_symbols[RAW_BODY]) return false;
+  // Both are valid only during error recovery: resync on host text up to the
+  // next tag, so a broken tag does not swallow the rest of the file.
+  if (valid_symbols[CONTENT] && valid_symbols[RAW_BODY]) return scan_content(lexer);
   if (valid_symbols[RAW_BODY]) return scan_raw_body(lexer);
   if (valid_symbols[CONTENT]) return scan_content(lexer);
   return false;
